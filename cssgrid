@@ -59,13 +59,6 @@ class Grid
     protected $_outputType = '';
 
     /**
-     * Array of raw arguments passed into this object
-     *
-     * @var array
-     */
-    protected $_rawArguments = array();
-
-    /**
      * Constructor
      *
      * @param ArgV $args Argument object
@@ -79,8 +72,6 @@ class Grid
         $this->set('margin', $args->margin);
 
         $this->_outputType = $args->output;
-
-        $this->_rawArguments = $args->getRawArguments();
     }
 
     /**
@@ -110,7 +101,7 @@ class Grid
 
         $widths = array();
         for ($col = 1; $col <= $cols; $col++) {
-            $width = $colWidth * $col + $margin * ($col - 1);
+            $width = $colWidth * $col + $gutter * ($col - 1);
 
             $widths[$col] = $width;
         }
@@ -148,9 +139,15 @@ class Grid
      */
     public function getGenerateSignature()
     {
+        // recreate the input args so the defaults are apparent
+        $args = array();
+        foreach ($this->_settings as $key => $value) {
+            $args[] = '--' . $key . '=' . $value;
+        }
+
         return 'Generated with cssgrid v' . $this->getVersion()
             . ' at ' . date('Y-m-d H:i:s') . "\n"
-            . ' cssgrid ' . implode(' ', $this->_rawArguments);
+            . ' cssgrid ' . implode(' ', $args);
     }
 
     /**
@@ -260,14 +257,17 @@ class GridOutputCss
 }
 
 .grid-col + .grid-col {
-    margin-left: %spx;
+    margin-left: %s;
 }
 
 CSS;
 
-        $css = sprintf(
-            $css, $grid->getGenerateSignature(), $grid->get('gutter')
+        // Format gutter css width (px or %)
+        $gutterCssWidth = $this->getCssWidth(
+            $grid->get('gutter'), $grid->get('max_width')
         );
+
+        $css = sprintf($css, $grid->getGenerateSignature(), $gutterCssWidth);
 
         $css .= "\n";
 
@@ -395,14 +395,14 @@ class ArgV
 
     /**
      * Rules for parsing parameters
-     * 
+     *
      * @var array
      */
     protected $_rawRules = array();
 
     /**
      * Flag to indicate whether parsing has been done
-     * 
+     *
      * @var bool
      */
     protected $_hasParsed = false;
@@ -812,7 +812,7 @@ class ArgV
 
     /**
      * Set a variable
-     * 
+     *
      * @param string $var Variable name
      * @param string $value Value
      * @return void
