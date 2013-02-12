@@ -71,7 +71,7 @@ class Grid
         $this->set('gutter', $args->gutter);
         $this->set('margin', $args->margin);
 
-        $this->_outputType = $args->output;
+        $this->setOutputType($args->output);
     }
 
     /**
@@ -141,6 +141,9 @@ class Grid
     {
         // recreate the input args so the defaults are apparent
         $args = array();
+
+        $args[] = '--output=' . $this->_outputType;
+
         foreach ($this->_settings as $key => $value) {
             $args[] = '--' . $key . '=' . $value;
         }
@@ -148,6 +151,23 @@ class Grid
         return 'Generated with cssgrid v' . $this->getVersion()
             . ' at ' . date('Y-m-d H:i:s') . "\n"
             . ' cssgrid ' . implode(' ', $args);
+    }
+
+    /**
+     * Set output type
+     *
+     * @param string $type Output type
+     * @return self
+     */
+    public function setOutputType($type)
+    {
+        if (null === $type) {
+            $type = 'pixels';
+        }
+
+        $this->_outputType = $type;
+
+        return $this;
     }
 
     /**
