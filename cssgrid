@@ -99,14 +99,22 @@ class Grid
         $maxWidth = ($colWidth * $cols + $gutter * ($cols - 1));
         $this->set('max_width', $maxWidth);
 
-        $widths = array();
-        for ($col = 1; $col <= $cols; $col++) {
-            $width = $colWidth * $col + $gutter * ($col - 1);
+        $columnCalcs = array(
+            'widths' => array(),
+            'pushes' => array(),
+            'pulls' => array(),
+            'prefixes' => array(),
+            'suffixes' => array(),
+        );
+        for ($index = 1; $index <= $cols; $index++) {
+            $width = $colWidth * $index + $gutter * ($index - 1);
 
-            $widths[$col] = $width;
+            $columnCalcs['widths'][$index] = $width;
+            $columnCalcs['pushes'][$index] = ($width < $maxWidth) ? $width + $gutter : $width;
+            $columnCalcs['pulls'][$index] = ($width < $maxWidth) ? ($width + $gutter) * -1 : $width * -1;
         }
 
-        $this->_columns = $widths;
+        $this->_columns = $columnCalcs;
         return $this;
     }
 
@@ -222,12 +230,39 @@ class GridOutputCss
     const OUTPUTTYPE_PERCENT = 'percent';
 
     /**
-     * Template for printf pattern for grid column CSS rule
+     * Template for printf format for grid column CSS rule
      *
      * @var string
      */
     protected $_template = ".grid-col_%dof%d { width: %s; }\n";
 
+    /**
+     * Template for printf format for grid push CSS rule
+     *
+     * @var string
+     */
+    protected $_pushTemplate = ".grid-col_push%dof%d { left: %s; }\n";
+
+    /**
+     * Template for printf format for grid pull CSS rule
+     *
+     * @var string
+     */
+    protected $_pullTemplate = ".grid-col_pull%dof%d { left: %s; }\n";
+
+    /**
+     * Template for printf format for grid prefix CSS rule
+     *
+     * @var string
+     */
+    protected $_prefixTemplate = ".grid-col_prefix%dof%d { margin-left: %s; }\n";
+
+    /**
+     * Template for printf format for grid suffix CSS rule
+     *
+     * @var string
+     */
+    protected $_suffixTemplate = ".grid-col_suffix%dof%d { margin-right: %s; }\n";
     /**
      * Output type (pixels or percent)
      *
@@ -293,11 +328,45 @@ CSS;
 
         $columns = $grid->getColumnWidths();
 
-        $totalColumns = count($columns);
-        foreach ($columns as $index => $width) {
+        $totalColumns = count($columns['widths']);
+
+        // Column widths CSS
+        foreach ($columns['widths'] as $index => $width) {
             $cssWidth = $this->getCssWidth($width, $grid->get('max_width'));
 
             $css .= sprintf($this->_template, $index, $totalColumns, $cssWidth);
+        }
+
+        $css .= "\n";
+
+        // Column pushes
+        foreach ($columns['pushes'] as $index => $push) {
+            $pushValue = $this->getCssWidth($push, $grid->get('max_width'));
+            $css .= sprintf($this->_pushTemplate, $index, $totalColumns, $pushValue);
+        }
+
+        $css .= "\n";
+
+        // Column pulls
+        foreach ($columns['pulls'] as $index => $pull) {
+            $pullValue = $this->getCssWidth($pull, $grid->get('max_width'));
+            $css .= sprintf($this->_pullTemplate, $index, $totalColumns, $pullValue);
+        }
+
+        $css .= "\n";
+
+        // Column prefixes
+        foreach ($columns['pushes'] as $index => $prefix) {
+            $prefixValue = $this->getCssWidth($prefix, $grid->get('max_width'));
+            $css .= sprintf($this->_prefixTemplate, $index, $totalColumns, $prefixValue);
+        }
+
+        $css .= "\n";
+
+        // Column suffixes
+        foreach ($columns['pushes'] as $index => $suffix) {
+            $suffixValue = $this->getCssWidth($suffix, $grid->get('max_width'));
+            $css .= sprintf($this->_suffixTemplate, $index, $totalColumns, $suffixValue);
         }
 
         $css .= "\n";
