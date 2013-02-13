@@ -28,38 +28,176 @@ This will generate the CSS rules for a grid and put them in a file `grid.css`.
 
 ## Example Output
 
-    /* ---------------------------------------------------------------------
-     Grid
-     Generated with cssgrid v0.5 at 2013-02-12 00:53:58
-     cssgrid --cols=12 --col_width=64 --gutter=16 --margin=10 --output=percent
-    ------------------------------------------------------------------------ */
-    .grid:after {
-        content: ".";
-        display: block;
-        height: 0;
-        clear: both;
-        visibility: hidden;
-    }
+```css
+/* ---------------------------------------------------------------------
+ Grid
+ Generated with cssgrid v0.6 at 2013-02-12 21:30:54
+ cssgrid --output=percent --cols=12 --col_width=67 --gutter=16 --margin=0 --max_width=980
+------------------------------------------------------------------------ */
+.grid:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
 
-    .grid-col {
-        position: relative;
-        float: left;
-    }
+.grid-col {
+    position: relative;
+    float: left;
+}
 
-    .grid-col + .grid-col {
-        margin-left: 16px;
-    }
+.grid-col + .grid-col {
+    margin-left: 1.6326530612245%;
+}
 
-    .grid-col_1of12 { width: 6.7796610169492%; }
-    .grid-col_2of12 { width: 14.618644067797%; }
-    .grid-col_3of12 { width: 22.457627118644%; }
-    .grid-col_4of12 { width: 30.296610169492%; }
-    .grid-col_5of12 { width: 38.135593220339%; }
-    .grid-col_6of12 { width: 45.974576271186%; }
-    .grid-col_7of12 { width: 53.813559322034%; }
-    .grid-col_8of12 { width: 61.652542372881%; }
-    .grid-col_9of12 { width: 69.491525423729%; }
-    .grid-col_10of12 { width: 77.330508474576%; }
-    .grid-col_11of12 { width: 85.169491525424%; }
-    .grid-col_12of12 { width: 93.008474576271%; }
+.grid-col_1of12 { width: 6.8367346938776%; }
+.grid-col_2of12 { width: 15.30612244898%; }
+.grid-col_3of12 { width: 23.775510204082%; }
+.grid-col_4of12 { width: 32.244897959184%; }
+.grid-col_5of12 { width: 40.714285714286%; }
+.grid-col_6of12 { width: 49.183673469388%; }
+.grid-col_7of12 { width: 57.65306122449%; }
+.grid-col_8of12 { width: 66.122448979592%; }
+.grid-col_9of12 { width: 74.591836734694%; }
+.grid-col_10of12 { width: 83.061224489796%; }
+.grid-col_11of12 { width: 91.530612244898%; }
+.grid-col_12of12 { width: 100%; }
 
+.grid-col_push1of12 { left: 8.469387755102%; }
+.grid-col_push2of12 { left: 16.938775510204%; }
+.grid-col_push3of12 { left: 25.408163265306%; }
+.grid-col_push4of12 { left: 33.877551020408%; }
+.grid-col_push5of12 { left: 42.34693877551%; }
+.grid-col_push6of12 { left: 50.816326530612%; }
+.grid-col_push7of12 { left: 59.285714285714%; }
+.grid-col_push8of12 { left: 67.755102040816%; }
+.grid-col_push9of12 { left: 76.224489795918%; }
+.grid-col_push10of12 { left: 84.69387755102%; }
+.grid-col_push11of12 { left: 93.163265306122%; }
+.grid-col_push12of12 { left: 100%; }
+
+.grid-col_pull1of12 { left: -8.469387755102%; }
+.grid-col_pull2of12 { left: -16.938775510204%; }
+.grid-col_pull3of12 { left: -25.408163265306%; }
+.grid-col_pull4of12 { left: -33.877551020408%; }
+.grid-col_pull5of12 { left: -42.34693877551%; }
+.grid-col_pull6of12 { left: -50.816326530612%; }
+.grid-col_pull7of12 { left: -59.285714285714%; }
+.grid-col_pull8of12 { left: -67.755102040816%; }
+.grid-col_pull9of12 { left: -76.224489795918%; }
+.grid-col_pull10of12 { left: -84.69387755102%; }
+.grid-col_pull11of12 { left: -93.163265306122%; }
+.grid-col_pull12of12 { left: -100%; }
+
+.grid-col_prefix1of12 { margin-left: 8.469387755102%; }
+.grid-col_prefix2of12 { margin-left: 16.938775510204%; }
+.grid-col_prefix3of12 { margin-left: 25.408163265306%; }
+.grid-col_prefix4of12 { margin-left: 33.877551020408%; }
+.grid-col_prefix5of12 { margin-left: 42.34693877551%; }
+.grid-col_prefix6of12 { margin-left: 50.816326530612%; }
+.grid-col_prefix7of12 { margin-left: 59.285714285714%; }
+.grid-col_prefix8of12 { margin-left: 67.755102040816%; }
+.grid-col_prefix9of12 { margin-left: 76.224489795918%; }
+.grid-col_prefix10of12 { margin-left: 84.69387755102%; }
+.grid-col_prefix11of12 { margin-left: 93.163265306122%; }
+.grid-col_prefix12of12 { margin-left: 100%; }
+
+.grid-col_suffix1of12 { margin-right: 8.469387755102%; }
+.grid-col_suffix2of12 { margin-right: 16.938775510204%; }
+.grid-col_suffix3of12 { margin-right: 25.408163265306%; }
+.grid-col_suffix4of12 { margin-right: 33.877551020408%; }
+.grid-col_suffix5of12 { margin-right: 42.34693877551%; }
+.grid-col_suffix6of12 { margin-right: 50.816326530612%; }
+.grid-col_suffix7of12 { margin-right: 59.285714285714%; }
+.grid-col_suffix8of12 { margin-right: 67.755102040816%; }
+.grid-col_suffix9of12 { margin-right: 76.224489795918%; }
+.grid-col_suffix10of12 { margin-right: 84.69387755102%; }
+.grid-col_suffix11of12 { margin-right: 93.163265306122%; }
+.grid-col_suffix12of12 { margin-right: 100%; }
+```
+
+## How to Use in HTML
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- META DATA -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="MSSmartTagsPreventParsing" content="true" />
+        <meta http-equiv="imagetoolbar" content="no" />
+        <!--[if IE]><meta http-equiv="cleartype" content="on" /><![endif]-->
+
+        <!-- SEO -->
+        <title>Demo Grid</title>
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+
+        <!-- STYLESHEETS -->
+        <link rel="stylesheet" media="screen, projection" href="grid.css" />
+        <style>
+            body { background-color: #eeeeec; }
+            .wrapper { width: 980px; margin: 0 auto; }
+            .box {
+                height: 100px;
+                padding-top: 20px;
+                margin-bottom:16px;
+                background-color: #e9b96e;
+                color: #ce5c00;
+                border: 2px solid #204a87;
+                text-align: center;
+            }
+        </style>
+    </head>
+<body>
+    <div class="wrapper">
+        <div class="grid">
+            <div class="grid-col grid-col_8of12">
+                <div class="box">COL 1 (8of12)</div>
+            </div>
+            <div class="grid-col grid-col_2of12">
+                <div class="box">COL 2 (2of12)</div>
+            </div>
+            <div class="grid-col grid-col_2of12">
+                <div class="box">COL 3 (2of12)</div>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="grid-col grid-col_8of12">
+                <div class="box">COL 1 (8of12)</div>
+            </div>
+            <div class="grid-col grid-col_2of12 grid-col_push2of12">
+                <div class="box">COL 2<br />push --&gt;</div>
+            </div>
+            <div class="grid-col grid-col_2of12 grid-col_pull2of12">
+                <div class="box">COL 3<br />&lt;-- pull</div>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="grid-col grid-col_2of12 grid-col_prefix6of12">
+                <div class="box">COL 1 (2of12)<br />|-- prefix6of12</div>
+            </div>
+            <div class="grid-col grid-col_2of12">
+                <div class="box">COL 2 (2of12)</div>
+            </div>
+            <div class="grid-col grid-col_2of12">
+                <div class="box">COL 3 (2of12)</div>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="grid-col grid-col_2of12">
+                <div class="box">COL 1 (2of12)</div>
+            </div>
+            <div class="grid-col grid-col_2of12">
+                <div class="box">COL 2 (2of12)</div>
+            </div>
+            <div class="grid-col grid-col_2of12 grid-col_suffix6of12">
+                <div class="box">COL 3<br />suffix6of12 --|</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+```
