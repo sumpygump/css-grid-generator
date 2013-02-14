@@ -8,7 +8,12 @@
 
 namespace Grid;
 
-$args = new ArgV($argv);
+$argRules = array(
+    'h|help'    => 'help',
+    'v|version' => 'version',
+);
+
+$args = new ArgV($argv, $argRules);
 
 $grid = new Grid($args);
 $grid->calculateColumns();
@@ -30,7 +35,7 @@ class Grid
      *
      * @var string
      */
-    const VERSION = '0.6';
+    const VERSION = '0.7';
 
     /**
      * Constants for unit types
@@ -74,6 +79,16 @@ class Grid
      */
     public function __construct(ArgV $args)
     {
+        if ($args->version | $args->v) {
+            $this->displayVersion();
+            exit(0);
+        }
+
+        if ($args->help | $args->h | $args->{'?'}) {
+            $this->displayHelp();
+            exit(0);
+        }
+
         $this->set('cols', $args->cols);
         $this->set('col-width', $args->{'col-width'});
         $this->set('gutter', $args->gutter);
@@ -90,6 +105,58 @@ class Grid
     public function getVersion()
     {
         return self::VERSION;
+    }
+
+    /**
+     * Display version information
+     *
+     * @return self
+     */
+    public function displayVersion()
+    {
+        printf("cssgrid %s\n", $this->getVersion());
+        return $this;
+    }
+
+    /**
+     * Display help information
+     *
+     * @return self
+     */
+    public function displayHelp()
+    {
+        $this->displayVersion();
+
+        print <<<EOS
+Generate CSS for a grid based on specified columns, widths and gutter width
+
+Usage: cssgrid [--cols=<number>] [--col-width=<number>] [--gutter=<number>] 
+       [--outer-margin=<number>] [--units=<pixels|percent>]
+
+Options:
+    --cols=<number>          Number of columns (default: 12)
+    --col-width=<number>     Width in pixels of the columns (default: 64)
+    --gutter=<number>        Width of the gutters between the columns (default: 10)
+    --outer-margin=<number>  Width in pixels of grid's outside margin (default: 0)
+    --units=<pixels|percent> Output units (pixels or percent)
+
+    -v, --version            Display version information and exit
+    -h, --help               Display this help message and exit
+
+Example:
+    cssgrid --cols=8 --col-width=180 --gutter=18 --outer-margin=0 --units=percent
+
+Output:
+    The output is a CSS ruleset that can be added to a CSS file that defines 
+    the .grid and .grid-col classes with columns, pushes, pulls, prefixes and 
+    suffixes.
+
+        The output will include a CSS comment header that provides the date of 
+    generation and parameters used to generate. It will also include a parameter of 
+    --max-width that will indicate the grid's total calculated width.
+
+
+EOS;
     }
 
     /**
