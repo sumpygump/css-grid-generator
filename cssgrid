@@ -33,15 +33,23 @@ class Grid
     const VERSION = '0.6';
 
     /**
+     * Constants for unit types
+     *
+     * @var string
+     */
+    const UNIT_PIXELS  = 'pixels';
+    const UNIT_PERCENT = 'percent';
+
+    /**
      * Settings
      *
      * @var array
      */
     protected $_settings = array(
-        'cols'      => 12,
-        'col_width' => 64,
-        'gutter'    => 10,
-        'margin'    => 0,
+        'cols'         => 12,
+        'col-width'    => 64,
+        'gutter'       => 10,
+        'outer-margin' => 0,
     );
 
     /**
@@ -52,11 +60,11 @@ class Grid
     protected $_columns = array();
 
     /**
-     * Output type
+     * Output units
      *
      * @var string
      */
-    protected $_outputType = '';
+    protected $_outputUnit = '';
 
     /**
      * Constructor
@@ -67,11 +75,11 @@ class Grid
     public function __construct(ArgV $args)
     {
         $this->set('cols', $args->cols);
-        $this->set('col_width', $args->col_width);
+        $this->set('col-width', $args->{'col-width'});
         $this->set('gutter', $args->gutter);
-        $this->set('margin', $args->margin);
+        $this->set('outer-margin', $args->{'outer-margin'});
 
-        $this->setOutputType($args->output);
+        $this->setOutputUnit($args->units);
     }
 
     /**
@@ -92,12 +100,12 @@ class Grid
     public function calculateColumns()
     {
         $cols     = $this->get('cols');
-        $colWidth = $this->get('col_width');
+        $colWidth = $this->get('col-width');
         $gutter   = $this->get('gutter');
-        $margin   = $this->get('margin');
+        $margin   = $this->get('outer-margin');
 
         $maxWidth = ($colWidth * $cols + $gutter * ($cols - 1));
-        $this->set('max_width', $maxWidth);
+        $this->set('max-width', $maxWidth);
 
         $columnCalcs = array(
             'widths' => array(),
@@ -125,7 +133,7 @@ class Grid
      */
     public function renderCss()
     {
-        $cssOutput = new GridOutputCss($this->_outputType);
+        $cssOutput = new GridOutputCss($this->_outputUnit);
 
         return $cssOutput->render($this);
     }
@@ -150,7 +158,7 @@ class Grid
         // recreate the input args so the defaults are apparent
         $args = array();
 
-        $args[] = '--output=' . $this->_outputType;
+        $args[] = '--units=' . $this->_outputUnit;
 
         foreach ($this->_settings as $key => $value) {
             $args[] = '--' . $key . '=' . $value;
@@ -162,18 +170,18 @@ class Grid
     }
 
     /**
-     * Set output type
+     * Set output unit
      *
-     * @param string $type Output type
+     * @param string $units Output type
      * @return self
      */
-    public function setOutputType($type)
+    public function setOutputUnit($units)
     {
-        if (null === $type) {
-            $type = 'pixels';
+        if (null === $units) {
+            $units = self::UNIT_PIXELS;
         }
 
-        $this->_outputType = $type;
+        $this->_outputUnit = $units;
 
         return $this;
     }
@@ -226,8 +234,8 @@ class GridOutputCss
      *
      * @var string
      */
-    const OUTPUTTYPE_PIXELS  = 'pixels';
-    const OUTPUTTYPE_PERCENT = 'percent';
+    const OUTPUTUNIT_PIXELS  = 'pixels';
+    const OUTPUTUNIT_PERCENT = 'percent';
 
     /**
      * Template for printf format for grid column CSS rule
@@ -263,25 +271,26 @@ class GridOutputCss
      * @var string
      */
     protected $_suffixTemplate = ".grid-col_suffix%dof%d { margin-right: %s; }\n";
+
     /**
-     * Output type (pixels or percent)
+     * Output unit (pixels or percent)
      *
      * @var string
      */
-    protected $_outputType = '';
+    protected $_outputUnit = '';
 
     /**
      * Constructor
      *
-     * @param string $outputType Output type
+     * @param string $outputUnit Output unit type
      * @return void
      */
-    public function __construct($outputType = null)
+    public function __construct($outputUnit = null)
     {
-        if (null === $outputType) {
-            $this->_outputType = self::OUTPUTTYPE_PIXELS;
+        if (null === $outputUnit) {
+            $this->_outputUnit = self::OUTPUTUNIT_PIXELS;
         } else {
-            $this->_outputType = $outputType;
+            $this->_outputUnit = $outputUnit;
         }
     }
 
@@ -319,7 +328,7 @@ CSS;
 
         // Format gutter css width (px or %)
         $gutterCssWidth = $this->getCssWidth(
-            $grid->get('gutter'), $grid->get('max_width')
+            $grid->get('gutter'), $grid->get('max-width')
         );
 
         $css = sprintf($css, $grid->getGenerateSignature(), $gutterCssWidth);
@@ -332,7 +341,7 @@ CSS;
 
         // Column widths CSS
         foreach ($columns['widths'] as $index => $width) {
-            $cssWidth = $this->getCssWidth($width, $grid->get('max_width'));
+            $cssWidth = $this->getCssWidth($width, $grid->get('max-width'));
 
             $css .= sprintf($this->_template, $index, $totalColumns, $cssWidth);
         }
@@ -341,7 +350,7 @@ CSS;
 
         // Column pushes
         foreach ($columns['pushes'] as $index => $push) {
-            $pushValue = $this->getCssWidth($push, $grid->get('max_width'));
+            $pushValue = $this->getCssWidth($push, $grid->get('max-width'));
             $css .= sprintf($this->_pushTemplate, $index, $totalColumns, $pushValue);
         }
 
@@ -349,7 +358,7 @@ CSS;
 
         // Column pulls
         foreach ($columns['pulls'] as $index => $pull) {
-            $pullValue = $this->getCssWidth($pull, $grid->get('max_width'));
+            $pullValue = $this->getCssWidth($pull, $grid->get('max-width'));
             $css .= sprintf($this->_pullTemplate, $index, $totalColumns, $pullValue);
         }
 
@@ -357,7 +366,7 @@ CSS;
 
         // Column prefixes
         foreach ($columns['pushes'] as $index => $prefix) {
-            $prefixValue = $this->getCssWidth($prefix, $grid->get('max_width'));
+            $prefixValue = $this->getCssWidth($prefix, $grid->get('max-width'));
             $css .= sprintf($this->_prefixTemplate, $index, $totalColumns, $prefixValue);
         }
 
@@ -365,7 +374,7 @@ CSS;
 
         // Column suffixes
         foreach ($columns['pushes'] as $index => $suffix) {
-            $suffixValue = $this->getCssWidth($suffix, $grid->get('max_width'));
+            $suffixValue = $this->getCssWidth($suffix, $grid->get('max-width'));
             $css .= sprintf($this->_suffixTemplate, $index, $totalColumns, $suffixValue);
         }
 
@@ -375,7 +384,7 @@ CSS;
     }
 
     /**
-     * Get the css value for a given column based on current output type
+     * Get the css value for a given column based on current output unit
      *
      * e.g. '24px' or '6.7%'
      *
@@ -385,7 +394,7 @@ CSS;
      */
     public function getCssWidth($pixels, $maxWidth = 1)
     {
-        if ($this->_outputType == self::OUTPUTTYPE_PERCENT) {
+        if ($this->_outputUnit == self::OUTPUTUNIT_PERCENT) {
             $percent = $pixels / $maxWidth * 100;
             return $percent . '%';
         }
