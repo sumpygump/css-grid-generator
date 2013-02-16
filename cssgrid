@@ -54,7 +54,6 @@ class Grid
         'cols'         => 12,
         'col-width'    => 64,
         'gutter'       => 10,
-        'outer-margin' => 0,
     );
 
     /**
@@ -92,7 +91,6 @@ class Grid
         $this->set('cols', $args->cols);
         $this->set('col-width', $args->{'col-width'});
         $this->set('gutter', $args->gutter);
-        $this->set('outer-margin', $args->{'outer-margin'});
 
         $this->setOutputUnit($args->units);
     }
@@ -137,7 +135,6 @@ Options:
     --cols=<number>          Number of columns (default: 12)
     --col-width=<number>     Width in pixels of the columns (default: 64)
     --gutter=<number>        Width of the gutters between the columns (default: 10)
-    --outer-margin=<number>  Width in pixels of grid's outside margin (default: 0)
     --units=<pixels|percent> Output units (pixels or percent)
 
     -v, --version            Display version information and exit
@@ -169,7 +166,6 @@ EOS;
         $cols     = $this->get('cols');
         $colWidth = $this->get('col-width');
         $gutter   = $this->get('gutter');
-        $margin   = $this->get('outer-margin');
 
         $maxWidth = ($colWidth * $cols + $gutter * ($cols - 1));
         $this->set('max-width', $maxWidth);

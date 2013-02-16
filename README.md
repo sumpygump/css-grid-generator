@@ -14,7 +14,7 @@ to the `cssgrid` script.
 
 ## Usage
 
-    cssgrid --cols=12 --col-width=64 --gutter=16 --outer-margin=10 --units=percent > grid.css
+    cssgrid --cols=12 --col-width=64 --gutter=16 --units=percent > grid.css
 
 This will generate the CSS rules for a grid and put them in a file `grid.css`.
 
@@ -23,7 +23,6 @@ This will generate the CSS rules for a grid and put them in a file `grid.css`.
     --cols : number of columns
     --col-width : width in pixels of columns
     --gutter : width in pixels of gutter space between columns
-    --outer-margin : margin of grid container
     --units : output units (pixels or percent)
 
 ## Example Output
@@ -32,7 +31,7 @@ This will generate the CSS rules for a grid and put them in a file `grid.css`.
 /* ---------------------------------------------------------------------
  Grid
  Generated with cssgrid v0.6 at 2013-02-12 21:30:54
- cssgrid --units=percent --cols=12 --col-width=67 --gutter=16 --outer-margin=0 --max-width=980
+ cssgrid --units=percent --cols=12 --col-width=67 --gutter=16 --max-width=980
 ------------------------------------------------------------------------ */
 .grid:after {
     content: ".";
