@@ -1,7 +1,7 @@
 css-grid-generator
 ==================
 
-Simple PHP script to generate CSS for a grid based in inputs similar to gridinator.com
+Simple PHP script to generate CSS for a grid
 
 ## Installation
 
@@ -12,9 +12,13 @@ to the `cssgrid` script.
     $ git clone git://github.com/sumpygump/css-grid-generator.git
     $ ln -s css-grid-generator/cssgrid
 
+## Requirements
+
+    Requires PHP 5.4+
+
 ## Usage
 
-    cssgrid --cols=12 --col-width=64 --gutter=16 --units=percent > grid.css
+    cssgrid --cols=12 --col-width=67 --gutter=16 --units=percent > grid.css
 
 This will generate the CSS rules for a grid and put them in a file `grid.css`.
 
@@ -31,7 +35,18 @@ This will generate the CSS rules for a grid and put them in a file `grid.css`.
 /* ---------------------------------------------------------------------
  Grid
  Generated with cssgrid v0.6 at 2013-02-12 21:30:54
+ https://github.com/sumpygump/css-grid-generator
  cssgrid --units=percent --cols=12 --col-width=67 --gutter=16 --max-width=980
+
+ ============================================
+ Formulas used for calculation of grid values
+ ============================================
+ gutter      = (gutter / max-width) * 100
+ col-width   = ((col-width * col-index) + (gutter * (col-index - 1))) / max-width) * 100
+ col-push    = ((col-width * col-index) + (gutter * col-index)) / max-width) * 100
+ col-pull    = ((col-width * col-index) + (gutter * col-index)) / max-width) * 100 * -1
+ col-prefix  = ((col-width * col-index) + (gutter * col-index)) / max-width) * 100
+ col-suffix  = ((col-width * col-index) + (gutter * col-index)) / max-width) * 100 * -1
 ------------------------------------------------------------------------ */
 .grid:after {
     content: ".";
