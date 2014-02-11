@@ -228,19 +228,18 @@ EOS;
         }
 
         // create the comments that show the math behind the calculations
-        $pixelConversionComment = $this->_outputUnit == '1' ? ' * 100' : '';
+        $pixelConversionCommentBegin = $this->_outputUnit == 'percent' ? '(' : '';
+        $pixelConversionCommentEnd = $this->_outputUnit == 'percent' ? ' / max-width) * 100' : '';
 
         $calcuationComments  = ' ============================================' . "\n";
         $calcuationComments .= ' Formulas used for calculation of grid values' . "\n";
         $calcuationComments .= ' ============================================' . "\n";
-        $calcuationComments .= ' gutter      = (gutter / max-width) * 100' . "\n";
-        $calcuationComments .= ' col-width   = ((col-width * col-index) + (gutter * (col-index - 1))) / max-width)' . $pixelConversionComment . "\n";
-        $calcuationComments .= ' col-push    = ((col-width * col-index) + (gutter * col-index)) / max-width)' . $pixelConversionComment . "\n";
-        $calcuationComments .= ' col-pull    = ((col-width * col-index) + (gutter * col-index)) / max-width)' . $pixelConversionComment . ' * -1' . "\n";
-        $calcuationComments .= ' col-prefix  = ((col-width * col-index) + (gutter * col-index)) / max-width)' . $pixelConversionComment . "\n";
-        $calcuationComments .= ' col-suffix  = ((col-width * col-index) + (gutter * col-index)) / max-width)' . $pixelConversionComment . ' * -1';
-
-
+        $calcuationComments .= ' gutter      = ' . $pixelConversionCommentBegin . 'gutter' . $pixelConversionCommentEnd . "\n";
+        $calcuationComments .= ' col-width   = ' . $pixelConversionCommentBegin . '((col-width * col-index) + (gutter * (col-index - 1))' . $pixelConversionCommentEnd . "\n";
+        $calcuationComments .= ' col-push    = ' . $pixelConversionCommentBegin . '((col-width * col-index) + (gutter * col-index))' . $pixelConversionCommentEnd . "\n";
+        $calcuationComments .= ' col-pull    = ' . $pixelConversionCommentBegin . '((col-width * col-index) + (gutter * col-index))' . $pixelConversionCommentEnd . " * -1\n";
+        $calcuationComments .= ' col-prefix  = ' . $pixelConversionCommentBegin . '((col-width * col-index) + (gutter * col-index))' . $pixelConversionCommentEnd . "\n";
+        $calcuationComments .= ' col-suffix  = ' . $pixelConversionCommentBegin . '((col-width * col-index) + (gutter * col-index))' . $pixelConversionCommentEnd . " * -1";
 
         return 'Generated with cssgrid v' . $this->getVersion()
             . ' at ' . date('Y-m-d H:i:s') . "\n"

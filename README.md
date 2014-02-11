@@ -42,11 +42,11 @@ This will generate the CSS rules for a grid and put them in a file `grid.css`.
  Formulas used for calculation of grid values
  ============================================
  gutter      = (gutter / max-width) * 100
- col-width   = ((col-width * col-index) + (gutter * (col-index - 1))) / max-width) * 100
- col-push    = ((col-width * col-index) + (gutter * col-index)) / max-width) * 100
- col-pull    = ((col-width * col-index) + (gutter * col-index)) / max-width) * 100 * -1
- col-prefix  = ((col-width * col-index) + (gutter * col-index)) / max-width) * 100
- col-suffix  = ((col-width * col-index) + (gutter * col-index)) / max-width) * 100 * -1
+ col-width   = (((col-width * col-index) + (gutter * (col-index - 1)) / max-width) * 100
+ col-push    = (((col-width * col-index) + (gutter * col-index)) / max-width) * 100
+ col-pull    = (((col-width * col-index) + (gutter * col-index)) / max-width) * 100 * -1
+ col-prefix  = (((col-width * col-index) + (gutter * col-index)) / max-width) * 100
+ col-suffix  = (((col-width * col-index) + (gutter * col-index)) / max-width) * 100 * -1
 ------------------------------------------------------------------------ */
 .grid:after {
     content: ".";
