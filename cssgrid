@@ -35,7 +35,7 @@ class Grid
      *
      * @var string
      */
-    const VERSION = '0.7';
+    const VERSION = '0.8';
 
     /**
      * Constants for unit types

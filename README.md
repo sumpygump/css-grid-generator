@@ -34,7 +34,8 @@ This will generate the CSS rules for a grid and put them in a file `grid.css`.
 ```css
 /* ---------------------------------------------------------------------
  Grid
- Generated with cssgrid v0.7 at 2013-02-12 21:30:54
+
+ Generated with cssgrid v0.8 at 2013-02-12 21:30:54
  https://github.com/sumpygump/css-grid-generator
  cssgrid --units=percent --cols=12 --col-width=67 --gutter=16 --max-width=980
 
