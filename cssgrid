@@ -128,7 +128,7 @@ class Grid
         print <<<EOS
 Generate CSS for a grid based on specified columns, widths and gutter width
 
-Usage: cssgrid [--cols=<number>] [--col-width=<number>] [--gutter=<number>] 
+Usage: cssgrid [--cols=<number>] [--col-width=<number>] [--gutter=<number>]
        [--outer-margin=<number>] [--units=<pixels|percent>]
 
 Options:
@@ -144,12 +144,12 @@ Example:
     cssgrid --cols=8 --col-width=180 --gutter=18 --outer-margin=0 --units=percent
 
 Output:
-    The output is a CSS ruleset that can be added to a CSS file that defines 
-    the .grid and .grid-col classes with columns, pushes, pulls, prefixes and 
+    The output is a CSS ruleset that can be added to a CSS file that defines
+    the .grid and .grid-col classes with columns, pushes, pulls, prefixes and
     suffixes.
 
-        The output will include a CSS comment header that provides the date of 
-    generation and parameters used to generate. It will also include a parameter of 
+        The output will include a CSS comment header that provides the date of
+    generation and parameters used to generate. It will also include a parameter of
     --max-width that will indicate the grid's total calculated width.
 
 
@@ -227,9 +227,26 @@ EOS;
             $args[] = '--' . $key . '=' . $value;
         }
 
+        // create the comments that show the math behind the calculations
+        $pixelConversionCommentBegin = $this->_outputUnit == 'percent' ? '(' : '';
+        $pixelConversionCommentEnd = $this->_outputUnit == 'percent' ? ' / max-width) * 100' : '';
+
+        $calcuationComments  = ' ============================================' . "\n";
+        $calcuationComments .= ' Formulas used for calculation of grid values' . "\n";
+        $calcuationComments .= ' ============================================' . "\n";
+        $calcuationComments .= ' gutter      = ' . $pixelConversionCommentBegin . 'gutter' . $pixelConversionCommentEnd . "\n";
+        $calcuationComments .= ' col-width   = ' . $pixelConversionCommentBegin . '((col-width * col-index) + (gutter * (col-index - 1))' . $pixelConversionCommentEnd . "\n";
+        $calcuationComments .= ' col-push    = ' . $pixelConversionCommentBegin . '((col-width * col-index) + (gutter * col-index))' . $pixelConversionCommentEnd . "\n";
+        $calcuationComments .= ' col-pull    = ' . $pixelConversionCommentBegin . '((col-width * col-index) + (gutter * col-index))' . $pixelConversionCommentEnd . " * -1\n";
+        $calcuationComments .= ' col-prefix  = ' . $pixelConversionCommentBegin . '((col-width * col-index) + (gutter * col-index))' . $pixelConversionCommentEnd . "\n";
+        $calcuationComments .= ' col-suffix  = ' . $pixelConversionCommentBegin . '((col-width * col-index) + (gutter * col-index))' . $pixelConversionCommentEnd . " * -1";
+
         return 'Generated with cssgrid v' . $this->getVersion()
             . ' at ' . date('Y-m-d H:i:s') . "\n"
-            . ' cssgrid ' . implode(' ', $args);
+            . ' https://github.com/sumpygump/css-grid-generator' . "\n"
+            . ' cssgrid ' . implode(' ', $args) . "\n\n"
+            . $calcuationComments;
+
     }
 
     /**
@@ -368,6 +385,7 @@ class GridOutputCss
         $css = <<<CSS
 /* ---------------------------------------------------------------------
  Grid
+
  %s
 ------------------------------------------------------------------------ */
 .grid:after {
