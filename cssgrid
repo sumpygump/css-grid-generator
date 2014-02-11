@@ -46,6 +46,16 @@ class Grid
     const UNIT_PERCENT = 'percent';
 
     /**
+     * Array of possible options for output units
+     *
+     * @var array
+     */
+    protected $_outputUnitOptions = array(
+        self::UNIT_PIXELS,
+        self::UNIT_PERCENT,
+    );
+
+    /**
      * Settings
      *
      * @var array
@@ -228,25 +238,24 @@ EOS;
         }
 
         // create the comments that show the math behind the calculations
-        $pixelConversionCommentBegin = $this->_outputUnit == 'percent' ? '(' : '';
-        $pixelConversionCommentEnd = $this->_outputUnit == 'percent' ? ' / max-width) * 100' : '';
+        $pixelConversionCommentBegin = $this->isOutputUnitsPercent() ? '(' : '';
+        $pixelConversionCommentEnd = $this->isOutputUnitsPercent() ? ' / max-width) * 100' : '';
 
-        $calcuationComments  = ' ============================================' . "\n";
-        $calcuationComments .= ' Formulas used for calculation of grid values' . "\n";
-        $calcuationComments .= ' ============================================' . "\n";
-        $calcuationComments .= ' gutter      = ' . $pixelConversionCommentBegin . 'gutter' . $pixelConversionCommentEnd . "\n";
-        $calcuationComments .= ' col-width   = ' . $pixelConversionCommentBegin . '((col-width * col-index) + (gutter * (col-index - 1))' . $pixelConversionCommentEnd . "\n";
-        $calcuationComments .= ' col-push    = ' . $pixelConversionCommentBegin . '((col-width * col-index) + (gutter * col-index))' . $pixelConversionCommentEnd . "\n";
-        $calcuationComments .= ' col-pull    = ' . $pixelConversionCommentBegin . '((col-width * col-index) + (gutter * col-index))' . $pixelConversionCommentEnd . " * -1\n";
-        $calcuationComments .= ' col-prefix  = ' . $pixelConversionCommentBegin . '((col-width * col-index) + (gutter * col-index))' . $pixelConversionCommentEnd . "\n";
-        $calcuationComments .= ' col-suffix  = ' . $pixelConversionCommentBegin . '((col-width * col-index) + (gutter * col-index))' . $pixelConversionCommentEnd . " * -1";
+        $calculationComments  = ' ============================================' . "\n"
+            . ' Formulas used for calculation of grid values' . "\n"
+            . ' ============================================' . "\n"
+            . ' gutter      = ' . $pixelConversionCommentBegin . 'gutter' . $pixelConversionCommentEnd . "\n"
+            . ' col-width   = ' . $pixelConversionCommentBegin . '((col-width * col-index) + (gutter * (col-index - 1))' . $pixelConversionCommentEnd . "\n"
+            . ' col-push    = ' . $pixelConversionCommentBegin . '((col-width * col-index) + (gutter * col-index))' . $pixelConversionCommentEnd . "\n"
+            . ' col-pull    = ' . $pixelConversionCommentBegin . '((col-width * col-index) + (gutter * col-index))' . $pixelConversionCommentEnd . " * -1\n"
+            . ' col-prefix  = ' . $pixelConversionCommentBegin . '((col-width * col-index) + (gutter * col-index))' . $pixelConversionCommentEnd . "\n"
+            . ' col-suffix  = ' . $pixelConversionCommentBegin . '((col-width * col-index) + (gutter * col-index))' . $pixelConversionCommentEnd . " * -1";
 
         return 'Generated with cssgrid v' . $this->getVersion()
             . ' at ' . date('Y-m-d H:i:s') . "\n"
             . ' https://github.com/sumpygump/css-grid-generator' . "\n"
             . ' cssgrid ' . implode(' ', $args) . "\n\n"
-            . $calcuationComments;
-
+            . $calculationComments;
     }
 
     /**
@@ -257,7 +266,9 @@ EOS;
      */
     public function setOutputUnit($units)
     {
-        if (null === $units) {
+        if (null === $units
+            || !in_array($units, $this->_outputUnitOptions)
+        ) {
             $units = self::UNIT_PIXELS;
         }
 
@@ -297,6 +308,16 @@ EOS;
         }
 
         return $default;
+    }
+
+    /**
+     * Whether the output units is set to percentage
+     *
+     * @return bool
+     */
+    public function isOutputUnitsPercent()
+    {
+        return $this->_outputUnit == self::UNIT_PERCENT;
     }
 }
 
@@ -475,12 +496,22 @@ CSS;
      */
     public function getCssWidth($pixels, $maxWidth = 1)
     {
-        if ($this->_outputUnit == self::OUTPUTUNIT_PERCENT) {
+        if ($this->isOutputUnitsPercent()) {
             $percent = $pixels / $maxWidth * 100;
             return $percent . '%';
         }
 
         return $pixels . 'px';
+    }
+
+    /**
+     * Whether the output units is set to percentage
+     *
+     * @return bool
+     */
+    public function isOutputUnitsPercent()
+    {
+        return $this->_outputUnit == self::OUTPUTUNIT_PERCENT;
     }
 }
 
