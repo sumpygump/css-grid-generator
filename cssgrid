@@ -8,6 +8,11 @@
 
 namespace Grid;
 
+// Prevents warnings when running in environments that don't have timezone set.
+if (!ini_get('date.timezone')) {
+    date_default_timezone_set('UTC');
+}
+
 $argRules = array(
     'h|help'    => 'help',
     'v|version' => 'version',
@@ -252,7 +257,7 @@ EOS;
             . ' col-suffix  = ' . $pixelConversionCommentBegin . '((col-width * col-index) + (gutter * col-index))' . $pixelConversionCommentEnd . " * -1";
 
         return 'Generated with cssgrid v' . $this->getVersion()
-            . ' at ' . date('Y-m-d H:i:s') . "\n"
+            . ' at ' . date('Y-m-d H:i:s T') . "\n"
             . ' https://github.com/sumpygump/css-grid-generator' . "\n"
             . ' cssgrid ' . implode(' ', $args) . "\n\n"
             . $calculationComments;
