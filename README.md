@@ -10,7 +10,7 @@ to the `cssgrid` script.
 
     $ cd ~/bin/
     $ git clone git://github.com/sumpygump/css-grid-generator.git
-    $ ln -s css-grid-generator/cssgrid
+    $ ln -s css-grid-generator/cssgrid cssgrid
 
 ## Requirements
 
@@ -35,7 +35,7 @@ This will generate the CSS rules for a grid and put them in a file `grid.css`.
 /* ---------------------------------------------------------------------
  Grid
 
- Generated with cssgrid v0.8 at 2013-02-12 21:30:54
+ Generated with cssgrid v0.8.1 at 2013-02-12 21:30:54 CST
  https://github.com/sumpygump/css-grid-generator
  cssgrid --units=percent --cols=12 --col-width=67 --gutter=16 --max-width=980
 

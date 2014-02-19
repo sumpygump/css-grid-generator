@@ -40,7 +40,7 @@ class Grid
      *
      * @var string
      */
-    const VERSION = '0.8';
+    const VERSION = '0.8.1';
 
     /**
      * Constants for unit types
