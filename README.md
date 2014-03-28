@@ -79,57 +79,57 @@ This will generate the CSS rules for a grid and put them in a file `grid.css`.
 .grid-col_11of12 { width: 91.530612244898%; }
 .grid-col_12of12 { width: 100%; }
 
-.grid-col_push1of12 { left: 8.469387755102%; }
-.grid-col_push2of12 { left: 16.938775510204%; }
-.grid-col_push3of12 { left: 25.408163265306%; }
-.grid-col_push4of12 { left: 33.877551020408%; }
-.grid-col_push5of12 { left: 42.34693877551%; }
-.grid-col_push6of12 { left: 50.816326530612%; }
-.grid-col_push7of12 { left: 59.285714285714%; }
-.grid-col_push8of12 { left: 67.755102040816%; }
-.grid-col_push9of12 { left: 76.224489795918%; }
-.grid-col_push10of12 { left: 84.69387755102%; }
-.grid-col_push11of12 { left: 93.163265306122%; }
-.grid-col_push12of12 { left: 100%; }
+.mix-grid-col_push1of12 { left: 8.469387755102%; }
+.mix-grid-col_push2of12 { left: 16.938775510204%; }
+.mix-grid-col_push3of12 { left: 25.408163265306%; }
+.mix-grid-col_push4of12 { left: 33.877551020408%; }
+.mix-grid-col_push5of12 { left: 42.34693877551%; }
+.mix-grid-col_push6of12 { left: 50.816326530612%; }
+.mix-grid-col_push7of12 { left: 59.285714285714%; }
+.mix-grid-col_push8of12 { left: 67.755102040816%; }
+.mix-grid-col_push9of12 { left: 76.224489795918%; }
+.mix-grid-col_push10of12 { left: 84.69387755102%; }
+.mix-grid-col_push11of12 { left: 93.163265306122%; }
+.mix-grid-col_push12of12 { left: 100%; }
 
-.grid-col_pull1of12 { left: -8.469387755102%; }
-.grid-col_pull2of12 { left: -16.938775510204%; }
-.grid-col_pull3of12 { left: -25.408163265306%; }
-.grid-col_pull4of12 { left: -33.877551020408%; }
-.grid-col_pull5of12 { left: -42.34693877551%; }
-.grid-col_pull6of12 { left: -50.816326530612%; }
-.grid-col_pull7of12 { left: -59.285714285714%; }
-.grid-col_pull8of12 { left: -67.755102040816%; }
-.grid-col_pull9of12 { left: -76.224489795918%; }
-.grid-col_pull10of12 { left: -84.69387755102%; }
-.grid-col_pull11of12 { left: -93.163265306122%; }
-.grid-col_pull12of12 { left: -100%; }
+.mix-grid-col_pull1of12 { left: -8.469387755102%; }
+.mix-grid-col_pull2of12 { left: -16.938775510204%; }
+.mix-grid-col_pull3of12 { left: -25.408163265306%; }
+.mix-grid-col_pull4of12 { left: -33.877551020408%; }
+.mix-grid-col_pull5of12 { left: -42.34693877551%; }
+.mix-grid-col_pull6of12 { left: -50.816326530612%; }
+.mix-grid-col_pull7of12 { left: -59.285714285714%; }
+.mix-grid-col_pull8of12 { left: -67.755102040816%; }
+.mix-grid-col_pull9of12 { left: -76.224489795918%; }
+.mix-grid-col_pull10of12 { left: -84.69387755102%; }
+.mix-grid-col_pull11of12 { left: -93.163265306122%; }
+.mix-grid-col_pull12of12 { left: -100%; }
 
-.grid-col_prefix1of12 { margin-left: 8.469387755102%; }
-.grid-col_prefix2of12 { margin-left: 16.938775510204%; }
-.grid-col_prefix3of12 { margin-left: 25.408163265306%; }
-.grid-col_prefix4of12 { margin-left: 33.877551020408%; }
-.grid-col_prefix5of12 { margin-left: 42.34693877551%; }
-.grid-col_prefix6of12 { margin-left: 50.816326530612%; }
-.grid-col_prefix7of12 { margin-left: 59.285714285714%; }
-.grid-col_prefix8of12 { margin-left: 67.755102040816%; }
-.grid-col_prefix9of12 { margin-left: 76.224489795918%; }
-.grid-col_prefix10of12 { margin-left: 84.69387755102%; }
-.grid-col_prefix11of12 { margin-left: 93.163265306122%; }
-.grid-col_prefix12of12 { margin-left: 100%; }
+.mix-grid-col_prefix1of12 { margin-left: 8.469387755102%; }
+.mix-grid-col_prefix2of12 { margin-left: 16.938775510204%; }
+.mix-grid-col_prefix3of12 { margin-left: 25.408163265306%; }
+.mix-grid-col_prefix4of12 { margin-left: 33.877551020408%; }
+.mix-grid-col_prefix5of12 { margin-left: 42.34693877551%; }
+.mix-grid-col_prefix6of12 { margin-left: 50.816326530612%; }
+.mix-grid-col_prefix7of12 { margin-left: 59.285714285714%; }
+.mix-grid-col_prefix8of12 { margin-left: 67.755102040816%; }
+.mix-grid-col_prefix9of12 { margin-left: 76.224489795918%; }
+.mix-grid-col_prefix10of12 { margin-left: 84.69387755102%; }
+.mix-grid-col_prefix11of12 { margin-left: 93.163265306122%; }
+.mix-grid-col_prefix12of12 { margin-left: 100%; }
 
-.grid-col_suffix1of12 { margin-right: 8.469387755102%; }
-.grid-col_suffix2of12 { margin-right: 16.938775510204%; }
-.grid-col_suffix3of12 { margin-right: 25.408163265306%; }
-.grid-col_suffix4of12 { margin-right: 33.877551020408%; }
-.grid-col_suffix5of12 { margin-right: 42.34693877551%; }
-.grid-col_suffix6of12 { margin-right: 50.816326530612%; }
-.grid-col_suffix7of12 { margin-right: 59.285714285714%; }
-.grid-col_suffix8of12 { margin-right: 67.755102040816%; }
-.grid-col_suffix9of12 { margin-right: 76.224489795918%; }
-.grid-col_suffix10of12 { margin-right: 84.69387755102%; }
-.grid-col_suffix11of12 { margin-right: 93.163265306122%; }
-.grid-col_suffix12of12 { margin-right: 100%; }
+.mix-grid-col_suffix1of12 { margin-right: 8.469387755102%; }
+.mix-grid-col_suffix2of12 { margin-right: 16.938775510204%; }
+.mix-grid-col_suffix3of12 { margin-right: 25.408163265306%; }
+.mix-grid-col_suffix4of12 { margin-right: 33.877551020408%; }
+.mix-grid-col_suffix5of12 { margin-right: 42.34693877551%; }
+.mix-grid-col_suffix6of12 { margin-right: 50.816326530612%; }
+.mix-grid-col_suffix7of12 { margin-right: 59.285714285714%; }
+.mix-grid-col_suffix8of12 { margin-right: 67.755102040816%; }
+.mix-grid-col_suffix9of12 { margin-right: 76.224489795918%; }
+.mix-grid-col_suffix10of12 { margin-right: 84.69387755102%; }
+.mix-grid-col_suffix11of12 { margin-right: 93.163265306122%; }
+.mix-grid-col_suffix12of12 { margin-right: 100%; }
 ```
 
 ## How to Use in HTML
@@ -183,15 +183,15 @@ This will generate the CSS rules for a grid and put them in a file `grid.css`.
             <div class="grid-col grid-col_8of12">
                 <div class="box">COL 1 (8of12)</div>
             </div>
-            <div class="grid-col grid-col_2of12 grid-col_push2of12">
+            <div class="grid-col grid-col_2of12 mix-grid-col_push2of12">
                 <div class="box">COL 2<br />push --&gt;</div>
             </div>
-            <div class="grid-col grid-col_2of12 grid-col_pull2of12">
+            <div class="grid-col grid-col_2of12 mix-grid-col_pull2of12">
                 <div class="box">COL 3<br />&lt;-- pull</div>
             </div>
         </div>
         <div class="grid">
-            <div class="grid-col grid-col_2of12 grid-col_prefix6of12">
+            <div class="grid-col grid-col_2of12 mix-grid-col_prefix6of12">
                 <div class="box">COL 1 (2of12)<br />|-- prefix6of12</div>
             </div>
             <div class="grid-col grid-col_2of12">
@@ -208,7 +208,7 @@ This will generate the CSS rules for a grid and put them in a file `grid.css`.
             <div class="grid-col grid-col_2of12">
                 <div class="box">COL 2 (2of12)</div>
             </div>
-            <div class="grid-col grid-col_2of12 grid-col_suffix6of12">
+            <div class="grid-col grid-col_2of12 mix-grid-col_suffix6of12">
                 <div class="box">COL 3<br />suffix6of12 --|</div>
             </div>
         </div>
