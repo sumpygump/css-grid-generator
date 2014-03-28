@@ -355,28 +355,28 @@ class GridOutputCss
      *
      * @var string
      */
-    protected $_pushTemplate = ".grid-col_push%dof%d { left: %s; }\n";
+    protected $_pushTemplate = ".mix-grid-col_push%dof%d { left: %s; }\n";
 
     /**
      * Template for printf format for grid pull CSS rule
      *
      * @var string
      */
-    protected $_pullTemplate = ".grid-col_pull%dof%d { left: %s; }\n";
+    protected $_pullTemplate = ".mix-grid-col_pull%dof%d { left: %s; }\n";
 
     /**
      * Template for printf format for grid prefix CSS rule
      *
      * @var string
      */
-    protected $_prefixTemplate = ".grid-col_prefix%dof%d { margin-left: %s; }\n";
+    protected $_prefixTemplate = ".mix-grid-col_prefix%dof%d { margin-left: %s; }\n";
 
     /**
      * Template for printf format for grid suffix CSS rule
      *
      * @var string
      */
-    protected $_suffixTemplate = ".grid-col_suffix%dof%d { margin-right: %s; }\n";
+    protected $_suffixTemplate = ".mix-grid-col_suffix%dof%d { margin-right: %s; }\n";
 
     /**
      * Output unit (pixels or percent)
