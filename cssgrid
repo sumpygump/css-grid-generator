@@ -415,7 +415,7 @@ class GridOutputCss
  %s
 ------------------------------------------------------------------------ */
 .grid:after {
-    content: ".";
+    content: " ";
     display: block;
     height: 0;
     clear: both;
