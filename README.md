@@ -50,7 +50,7 @@ This will generate the CSS rules for a grid and put them in a file `grid.css`.
  col-suffix  = (((col-width * col-index) + (gutter * col-index)) / max-width) * 100 * -1
 ------------------------------------------------------------------------ */
 .grid:after {
-    content: ".";
+    content: " ";
     display: block;
     height: 0;
     clear: both;
